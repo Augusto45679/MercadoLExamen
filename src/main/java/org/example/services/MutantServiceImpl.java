@@ -18,28 +18,4 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
        super(baseRepository);
     }
 
-    @Override
-    public List<Mutant> findAll() throws Exception {
-        return List.of();
-    }
-
-    @Override
-    public Mutant findById(Long aLong) throws Exception {
-        return null;
-    }
-
-    @Override
-    public Mutant save(Mutant entity) throws Exception {
-        return null;
-    }
-
-    @Override
-    public Mutant update(Long aLong, Mutant entity) throws Exception {
-        return null;
-    }
-
-    @Override
-    public Boolean delete(Long aLong) throws Exception {
-        return null;
-    }
 }
