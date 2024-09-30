@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MutantServiceImpl implements MutantService {
+public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
 
     @Autowired
     private MutantRepository mutantRepository;
 
     public MutantServiceImpl(BaseRepository<Mutant,Long> baseRepository) {
-       super();
+       super(baseRepository);
     }
 
     @Override

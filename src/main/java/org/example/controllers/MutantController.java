@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@CrossOrigin()
+@CrossOrigin(origins = "*")
 @RequestMapping(path = "/mutant")
 public class MutantController  extends BaseControllerImpl<Mutant, MutantServiceImpl>{
 
