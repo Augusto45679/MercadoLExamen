@@ -18,7 +18,7 @@ public class MutantController  extends BaseControllerImpl<Mutant, MutantServiceI
     @Autowired
     private MutantServiceImpl mutantServiceImpl;
 
-    @PostMapping(path = "/mutant")
+    @PostMapping
      public ResponseEntity<?> checkMutant(@RequestBody String[] dna){
           try{
             return ResponseEntity.status(HttpStatus.OK).body(service.isMutant(dna));
@@ -26,6 +26,13 @@ public class MutantController  extends BaseControllerImpl<Mutant, MutantServiceI
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
         }
      }
-
+     @GetMapping(path ="/stats")
+    public ResponseEntity<?> getStatsMutant(){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(mutantServiceImpl.getStats());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 
 }

@@ -1,5 +1,6 @@
 package org.example.services;
 
+import org.example.dto.MutantStats;
 import org.example.entities.Mutant;
 import org.example.repositories.BaseRepository;
 import org.example.repositories.MutantRepository;
@@ -18,6 +19,8 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
        super(baseRepository);
     }
 
+    private int mutantCounter =0;
+    private int humanCounter =0;
 
      public Boolean isMutant(String[] dna){
          int n = dna.length;
@@ -38,7 +41,10 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
              {
                  if(dna[i].charAt(j)== dna[i].charAt(j+1) && dna[i].charAt(j)== dna[i].charAt(j+2) && dna[i].charAt(j)== dna[i].charAt(j+3) )
                  {
+                     mutantCounter++;
                      return true;
+                 } else{
+                     humanCounter++;
                  }
              }
          }
@@ -50,7 +56,10 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
              {
                  if(  dna[i].charAt(k)== dna[i+1].charAt(k)   &&( dna[i].charAt(k) == dna[i+2].charAt(k) )&&( dna[i].charAt(k) == dna[i+3].charAt(k) )  )
                  {
+                     mutantCounter++;
                      return true;
+                 } else{
+                     humanCounter++;
                  }
              }
          }
@@ -61,7 +70,10 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
              {
                  if(dna[i].charAt(t)== dna[i-1].charAt(t+1) && dna[i].charAt(t)== dna[i-2].charAt(t+2) && dna[i].charAt(t)== dna[i-3].charAt(t+3) )
                  {
+                     mutantCounter++;
                      return true;
+                 } else {
+                     humanCounter++;
                  }
              }
          }
@@ -71,10 +83,21 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
                  if(dna[i].charAt(t) == dna[i+1].charAt(t+1) &&
                          dna[i].charAt(t) == dna[i+2].charAt(t+2) &&
                          dna[i].charAt(t) == dna[i+3].charAt(t+3)) {
+                     mutantCounter++;
                      return true;
+                 } else {
+                     humanCounter++;
                  }
              }
          }
          return false;
      }
+
+     public MutantStats getStats(){
+         double ratio = humanCounter == 0 ? 0 : (double) mutantCounter / humanCounter;
+         System.out.println("Contador humano: "+humanCounter);
+         System.out.println("Contador mutante: "+mutantCounter);
+         return new MutantStats(mutantCounter, humanCounter, ratio);
+     }
+
 }
