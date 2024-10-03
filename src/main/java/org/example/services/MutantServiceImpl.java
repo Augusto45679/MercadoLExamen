@@ -23,7 +23,15 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
          int n = dna.length;
          int counter =0;
 
-         // check if there is a horizontal sequence
+         for(String str : dna){
+             for(char c: str.toCharArray()){
+                 if(c!= 'A' && c!= 'T' && c!='C' && c!='G'){
+                     throw new IllegalArgumentException("Secuencia no valida.Las letras permitidas son A T G C ");
+                 }
+             }
+         }
+
+         //horizontal
          for(int i=0;i<n;i++)
          {
              for(int j=0; j<=n-4 ;j++)
@@ -35,7 +43,7 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
              }
          }
 
-         //check vertically for a sequence
+         //vertical
          for(int i=0;i<n-4;i++)
          {
              for(int k=0;k<n;k++)
@@ -46,13 +54,23 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
                  }
              }
          }
-         //check diagonally
+         //diagonal ascendente
          for(int i=3;i<n;i++)
          {
              for(int t=0;t<= n-4 ;t++)
              {
                  if(dna[i].charAt(t)== dna[i-1].charAt(t+1) && dna[i].charAt(t)== dna[i-2].charAt(t+2) && dna[i].charAt(t)== dna[i-3].charAt(t+3) )
                  {
+                     return true;
+                 }
+             }
+         }
+        // dagonal descendente
+         for(int i=0; i<=n-4; i++) {
+             for(int t=0; t<=n-4; t++) {
+                 if(dna[i].charAt(t) == dna[i+1].charAt(t+1) &&
+                         dna[i].charAt(t) == dna[i+2].charAt(t+2) &&
+                         dna[i].charAt(t) == dna[i+3].charAt(t+3)) {
                      return true;
                  }
              }
