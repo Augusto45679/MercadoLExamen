@@ -31,7 +31,7 @@ public class MutantController  extends BaseControllerImpl<Mutant, MutantServiceI
         try{
             return ResponseEntity.status(HttpStatus.OK).body(mutantServiceImpl.getStats());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error, por favor intente más tarde\"}");
         }
     }
 
