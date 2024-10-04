@@ -37,14 +37,9 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
             contadorSecuencias += checkHorizontal(dna,n);
             contadorSecuencias += checkVertical(dna,n);
             contadorSecuencias += checkDiagonal(dna,n);
-
+            humanCounter = n - contadorSecuencias;
+            
             boolean isMutant = contadorSecuencias > 1;
-
-        if (isMutant) {
-            mutantCounter++;
-        } else {
-            humanCounter++;
-        }
 
         return isMutant;
     }
@@ -112,7 +107,7 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
     public MutantStats getStats() {
         double ratio = humanCounter == 0 ? 0 : (double) mutantCounter / humanCounter;
         System.out.println("Contador humano: " + humanCounter);
-        System.out.println("Contador mutante: " + mutantCounter);
+        System.out.println("Contador mutante: " + contadorSecuencias);
         return new MutantStats(mutantCounter, humanCounter, ratio);
     }
 }
