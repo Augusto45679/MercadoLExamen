@@ -4,6 +4,7 @@ import org.example.entities.MutantStats;
 import org.example.entities.Mutant;
 import org.example.repositories.BaseRepository;
 import org.example.repositories.MutantRepository;
+import org.example.repositories.MutantStatsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,8 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
 
     @Autowired
     private MutantRepository mutantRepository;
+    @Autowired
+    private MutantStatsRepository mutantStatsRepository;
 
     public MutantServiceImpl(BaseRepository<Mutant, Long> baseRepository) {
         super(baseRepository);
@@ -29,6 +32,9 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
 
 
         for (String str : dna) {
+            if(str == null || str.length() == 0){
+                throw new IllegalArgumentException("La cadena es vacia");
+            }
             for (char c : str.toCharArray()) {
                 if (c != 'A' && c != 'T' && c != 'C' && c != 'G') {
                     throw new IllegalArgumentException("Secuencia no valida.Las letras permitidas son A T G C ");
@@ -47,6 +53,10 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
                 mutant.setSequence(String.join(",", dna));
                 mutant.setEsMutante(isMutant);
                 mutantRepository.save(mutant);
+                MutantStats mutantStats = MutantStats.builder().build();
+                mutantStats.setMutantCounter(mutantCounter);
+                mutantStats.setHumanCounter(humanCounter);
+                mutantStatsRepository.save(mutantStats);
             }
         return isMutant;
     }
