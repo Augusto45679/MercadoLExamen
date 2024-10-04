@@ -106,6 +106,7 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
         double ratio = humanCounter == 0 ? 0 : (double) mutantCounter / humanCounter;
         System.out.println("Contador humano: " + humanCounter);
         System.out.println("Contador mutante: " + contadorSecuencias);
+        System.out.println("Ratio: " + ratio);
         return new MutantStats(mutantCounter, humanCounter, ratio);
     }
 }
