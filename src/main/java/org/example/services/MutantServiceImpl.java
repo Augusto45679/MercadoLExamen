@@ -13,12 +13,14 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
     @Autowired
     private MutantRepository mutantRepository;
 
+
     public MutantServiceImpl(BaseRepository<Mutant, Long> baseRepository) {
         super(baseRepository);
     }
 
     private int mutantCounter = 0;
     private int humanCounter = 0;
+    int contadorSecuencias=0;
 
     public Boolean isMutant(String[] dna) {
         int n = dna.length;
@@ -32,7 +34,11 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
             }
         }
 
-        boolean isMutant = checkHorizontal(dna, n) || checkVertical(dna, n) || checkDiagonal(dna, n);
+            contadorSecuencias += checkHorizontal(dna,n);
+            contadorSecuencias += checkVertical(dna,n);
+            contadorSecuencias += checkDiagonal(dna,n);
+
+            boolean isMutant = contadorSecuencias > 1;
 
         if (isMutant) {
             mutantCounter++;
@@ -43,54 +49,63 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
         return isMutant;
     }
 
-    private boolean checkHorizontal(String[] dna, int n) {
+    private int checkHorizontal(String[] dna, int n) {
+        contadorSecuencias=0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j <= n - 4; j++) {
                 if (dna[i].charAt(j) == dna[i].charAt(j + 1) &&
                         dna[i].charAt(j) == dna[i].charAt(j + 2) &&
                         dna[i].charAt(j) == dna[i].charAt(j + 3)) {
-                    return true;
+                    contadorSecuencias++;
                 }
             }
         }
-        return false;
+        return contadorSecuencias;
     }
 
-    private boolean checkVertical(String[] dna, int n) {
+    private int checkVertical(String[] dna, int n) {
+        contadorSecuencias=0;
         for (int i = 0; i <= n - 4; i++) {
             for (int k = 0; k < n; k++) {
                 if (dna[i].charAt(k) == dna[i + 1].charAt(k) &&
                         dna[i].charAt(k) == dna[i + 2].charAt(k) &&
                         dna[i].charAt(k) == dna[i + 3].charAt(k)) {
-                    return true;
+                    contadorSecuencias++;
                 }
             }
         }
-        return false;
+        return contadorSecuencias;
     }
 
-    private boolean checkDiagonal(String[] dna, int n) {
+    private int checkDiagonal(String[] dna, int n) {
+        contadorSecuencias=0;
         // Diagonal ascendente
-        for (int i = 3; i < n; i++) {
-            for (int t = 0; t <= n - 4; t++) {
+        for (int i = 3; i < n; i++)
+        {
+            for (int t = 0; t <= n - 4; t++)
+            {
                 if (dna[i].charAt(t) == dna[i - 1].charAt(t + 1) &&
                         dna[i].charAt(t) == dna[i - 2].charAt(t + 2) &&
-                        dna[i].charAt(t) == dna[i - 3].charAt(t + 3)) {
-                    return true;
+                        dna[i].charAt(t) == dna[i - 3].charAt(t + 3))
+                {
+                    contadorSecuencias++;
                 }
             }
         }
         // Diagonal descendente
-        for (int i = 0; i <= n - 4; i++) {
-            for (int t = 0; t <= n - 4; t++) {
+        for (int i = 0; i <= n - 4; i++)
+        {
+            for (int t = 0; t <= n - 4; t++)
+            {
                 if (dna[i].charAt(t) == dna[i + 1].charAt(t + 1) &&
                         dna[i].charAt(t) == dna[i + 2].charAt(t + 2) &&
-                        dna[i].charAt(t) == dna[i + 3].charAt(t + 3)) {
-                    return true;
+                        dna[i].charAt(t) == dna[i + 3].charAt(t + 3))
+                {
+                    contadorSecuencias++;
                 }
             }
         }
-        return false;
+        return contadorSecuencias;
     }
 
 
