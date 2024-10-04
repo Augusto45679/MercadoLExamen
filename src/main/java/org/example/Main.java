@@ -1,6 +1,7 @@
 package org.example;
 
 import jakarta.transaction.Transactional;
+import org.example.entities.Mutant;
 import org.example.repositories.MutantRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,6 +26,7 @@ public class Main {
             String[] notAnArray = {"ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"};
             String[] notAnArray2 = {"ATGCGA","CAGTGC"};
 
+            Mutant mutant = Mutant.builder().build();
 
 
 

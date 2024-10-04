@@ -7,6 +7,8 @@ import org.example.repositories.MutantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
 
@@ -25,6 +27,7 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
         int n = dna.length;
         int counter = 0;
 
+
         for (String str : dna) {
             for (char c : str.toCharArray()) {
                 if (c != 'A' && c != 'T' && c != 'C' && c != 'G') {
@@ -39,7 +42,12 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
             humanCounter = n - contadorSecuencias;
 
             boolean isMutant = contadorSecuencias > 1;
-
+            if(isMutant == true){
+                Mutant mutant = Mutant.builder().build();
+                mutant.setSequence(String.join(",", dna));
+                mutant.setEsMutante(isMutant);
+                mutantRepository.save(mutant);
+            }
         return isMutant;
     }
 

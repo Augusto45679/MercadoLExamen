@@ -33,14 +33,15 @@ public abstract class BaseControllerImpl<E extends Base,S extends BaseServiceImp
     //      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error, por favor intente más tarde\"}");
     //  }
 //    }
-    //  @PostMapping("")
-    //public ResponseEntity<?> save(E entity){
-    //  try{
-    //      return ResponseEntity.status(HttpStatus.OK).body(service.save(entity));
-    //  } catch (Exception e) {
-    //      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, por favor intente más tarde\"}");
-    //  }
-    // }
+     @PostMapping("")
+    public ResponseEntity<?> save(E entity){
+      try{
+          return ResponseEntity.status(HttpStatus.OK).body(service.save(entity));
+      } catch (Exception e) {
+          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, por favor intente más tarde\"}");
+      }
+     }
+
     //@PostMapping("/{id}")
     //public ResponseEntity<?> update(Long id, E entity){
     //  try{
