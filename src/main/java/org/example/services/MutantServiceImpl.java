@@ -13,7 +13,6 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
     @Autowired
     private MutantRepository mutantRepository;
 
-
     public MutantServiceImpl(BaseRepository<Mutant, Long> baseRepository) {
         super(baseRepository);
     }
@@ -38,7 +37,7 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
             contadorSecuencias += checkVertical(dna,n);
             contadorSecuencias += checkDiagonal(dna,n);
             humanCounter = n - contadorSecuencias;
-            
+
             boolean isMutant = contadorSecuencias > 1;
 
         return isMutant;
@@ -102,7 +101,6 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
         }
         return contadorSecuencias;
     }
-
 
     public MutantStats getStats() {
         double ratio = humanCounter == 0 ? 0 : (double) mutantCounter / humanCounter;
