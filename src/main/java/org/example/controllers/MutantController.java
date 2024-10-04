@@ -12,13 +12,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/mutant")
 public class MutantController  extends BaseControllerImpl<Mutant, MutantServiceImpl> {
 
     @Autowired
     private MutantServiceImpl mutantServiceImpl;
 
-    @PostMapping
+    @PostMapping(path = "/mutant")
      public ResponseEntity<?> checkMutant(@RequestBody String[] dna){
           try{
             return ResponseEntity.status(HttpStatus.OK).body(service.isMutant(dna));
