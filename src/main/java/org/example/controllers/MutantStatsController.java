@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin(origins = " ")
 public class MutantStatsController extends BaseControllerImpl<MutantStats, MutantStatsServiceImpl> {
-    
+
     @Autowired
-    private MutantStats mutantStats;
+    private MutantStatsServiceImpl mutantStatsServiceImpl;
 }
