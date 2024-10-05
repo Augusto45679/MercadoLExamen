@@ -29,11 +29,13 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
     public Boolean isMutant(String[] dna) {
         int n = dna.length;
         int counter = 0;
-
+        if(n== 0 ||dna[0].length()==0){
+            throw new IllegalArgumentException("La cadena es vacia. Ingrese una cadena con caracteres válidos");
+        }
 
         for (String str : dna) {
-            if(str == null || str.length() == 0){
-                throw new IllegalArgumentException("La cadena es vacia");
+            if( str.length() != 0){
+                throw new IllegalArgumentException("Las cadenas deben tener la misma longitud");
             }
             for (char c : str.toCharArray()) {
                 if (c != 'A' && c != 'T' && c != 'C' && c != 'G') {

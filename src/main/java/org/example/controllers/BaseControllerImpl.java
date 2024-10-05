@@ -33,7 +33,7 @@ public abstract class BaseControllerImpl<E extends Base,S extends BaseServiceImp
     //      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error, por favor intente más tarde\"}");
     //  }
 //    }
-     @PostMapping("")
+     @PostMapping("/save")
     public ResponseEntity<?> save(E entity){
       try{
           return ResponseEntity.status(HttpStatus.OK).body(service.save(entity));

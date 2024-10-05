@@ -6,7 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
 
-@Table
+@Table(name = "Mutant stats")
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

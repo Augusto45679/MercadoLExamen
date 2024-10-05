@@ -18,4 +18,5 @@ public class MutantStatsServiceImpl extends BaseServiceImpl<MutantStats,Long>{
     public MutantStatsServiceImpl(BaseRepository<MutantStats, Long> baserepository) {
         super(baserepository);
     }
+
 }
