@@ -34,7 +34,7 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
         }
 
         for (String str : dna) {
-            
+
             for (char c : str.toCharArray()) {
                 if (c != 'A' && c != 'T' && c != 'C' && c != 'G') {
                     throw new IllegalArgumentException("Secuencia no valida.Las letras permitidas son A T G C ");
@@ -46,7 +46,7 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
             contadorSecuencias += checkVertical(dna,n);
             contadorSecuencias += checkDiagonal(dna,n);
             humanCounter = n - contadorSecuencias;
-
+            mutantCounter = contadorSecuencias;
             boolean isMutant = contadorSecuencias > 1;
             if(isMutant == true){
                 Mutant mutant = Mutant.builder().build();
