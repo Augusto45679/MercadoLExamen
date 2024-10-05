@@ -34,9 +34,7 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
         }
 
         for (String str : dna) {
-            if( str.length() != 0){
-                throw new IllegalArgumentException("Las cadenas deben tener la misma longitud");
-            }
+            
             for (char c : str.toCharArray()) {
                 if (c != 'A' && c != 'T' && c != 'C' && c != 'G') {
                     throw new IllegalArgumentException("Secuencia no valida.Las letras permitidas son A T G C ");
