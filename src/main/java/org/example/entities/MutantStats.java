@@ -6,7 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
 
-@Table(name = "Mutant stats")
+@Table(name = "mutant stats")
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -16,9 +16,9 @@ import lombok.*;
 public class MutantStats extends Base {
 
     @Column(name = "ContadorMutante")
-    private int mutantCounter =0;
+    private int mutantCounter;
     @Column(name = "ContadorHumano")
-    private int humanCounter =0;
+    private int humanCounter;
 
     private double ratio;
 }

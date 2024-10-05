@@ -8,7 +8,6 @@ import org.example.repositories.MutantStatsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
@@ -28,13 +27,11 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
 
     public Boolean isMutant(String[] dna) {
         int n = dna.length;
-        int counter = 0;
         if(n== 0 ||dna[0].length()==0){
             throw new IllegalArgumentException("La cadena es vacia. Ingrese una cadena con caracteres válidos");
         }
 
         for (String str : dna) {
-
             for (char c : str.toCharArray()) {
                 if (c != 'A' && c != 'T' && c != 'C' && c != 'G') {
                     throw new IllegalArgumentException("Secuencia no valida.Las letras permitidas son A T G C ");

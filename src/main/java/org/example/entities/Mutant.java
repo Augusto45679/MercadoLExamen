@@ -7,8 +7,6 @@ import jakarta.persistence.Table;
 import lombok.*;
 import org.hibernate.envers.Audited;
 
-import java.util.HashMap;
-import java.util.HashSet;
 
 @Table(name = "mutants")
 @AllArgsConstructor
