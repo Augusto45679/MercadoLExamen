@@ -30,11 +30,11 @@ public class Main {
             /*
                 CASOS MUTANTES
 
-                String[] dnaMutant1 = ["ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"]; //true
-                String[] dnaMutant2 = ["ATGCGA", "CAGTGC", "TTAAGT", "AGATGG", "CTCCTA", "TCACTG"];
-                String[] dnaMutant3 = ["AAAAAA", "CTGAGA", "TTATGT", "AGACGG", "GCGTCA", "TCACTG"];
-                String[] dnaMutant4 = ["ATGCGA", "CAGTGC", "TTAAGT", "AGATGG", "CTGCTA", "TCACTG"];
-                String[] dnaMutant5 = ["ATGCGA", "CTGTGC", "TTGTGT", "AGTGGG", "CTCTTA", "TCACTG"];
+                String[] dnaMutant1 = ["ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"]; // anduvo
+                String[] dnaMutant2 = ["ATGCGA", "CAGTGC", "TTAAGT", "AGATGG", "CTCCTA", "TCACTG"]; // no
+                String[] dnaMutant3 = ["AAAAAA", "CTGAGA", "TTATGT", "AGACGG", "GCGTCA", "TCACTG"]; // si
+                String[] dnaMutant4 = ["ATGCGA", "CAGTGC", "TTAAGT", "AGATGG", "CTGCTA", "TCACTG"]; // no
+                String[] dnaMutant5 = ["ATGCGA", "CTGTGC", "TTGTGT", "AGTGGG", "CTCTTA", "TCACTG"]; // si
 
                 CASOS NO MUTANTES
                 String[] dnaHuman1 = ["ATGCGA", "CAGTGC", "TTATGT", "AGACGG", "GCGTCA", "TCACTG"];

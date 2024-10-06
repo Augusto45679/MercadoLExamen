@@ -92,32 +92,27 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
 
     private int checkDiagonal(String[] dna, int n) {
         int secuencias = 0;
-        // Diagonal ascendente
-        for (int i = 3; i < n; i++)
-        {
-            for (int t = 0; t <= n - 4; t++)
-            {
-                if (dna[i].charAt(t) == dna[i - 1].charAt(t + 1) &&
-                        dna[i].charAt(t) == dna[i - 2].charAt(t + 2) &&
-                        dna[i].charAt(t) == dna[i - 3].charAt(t + 3))
-                {
-                    secuencias++;
-                }
-            }
-        }
-        // Diagonal descendente
-        for (int i = 0; i <= n - 4; i++)
-        {
-            for (int t = 0; t <= n - 4; t++)
-            {
+        // Diagonal ascendente (izquierda a derecha, abajo a arriba)
+        for (int i = 0; i <= n - 4; i++) {
+            for (int t = 0; t <= n - 4; t++) {
                 if (dna[i].charAt(t) == dna[i + 1].charAt(t + 1) &&
                         dna[i].charAt(t) == dna[i + 2].charAt(t + 2) &&
-                        dna[i].charAt(t) == dna[i + 3].charAt(t + 3))
-                {
+                        dna[i].charAt(t) == dna[i + 3].charAt(t + 3)) {
                     secuencias++;
                 }
             }
         }
+        // Diagonal descendente (izquierda a derecha, arriba a abajo)
+        for (int i = 3; i < n; i++) {
+            for (int t = 0; t <= n - 4; t++) {
+                if (dna[i].charAt(t) == dna[i - 1].charAt(t + 1) &&
+                        dna[i].charAt(t) == dna[i - 2].charAt(t + 2) &&
+                        dna[i].charAt(t) == dna[i - 3].charAt(t + 3)) {
+                    secuencias++;
+                }
+            }
+        }
+        // Contabilizar las secuencias diagonales encontradas
         contadorSecuencias += secuencias;
         return secuencias;
     }
