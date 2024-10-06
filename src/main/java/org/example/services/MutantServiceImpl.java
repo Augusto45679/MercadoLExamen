@@ -14,8 +14,9 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
 
     @Autowired
     private MutantRepository mutantRepository;
+
     @Autowired
-    private MutantStatsRepository mutantStatsRepository;
+    private MutantStatsServiceImpl mutantStatsServiceImpl;
 
     public MutantServiceImpl(BaseRepository<Mutant, Long> baseRepository) {
         super(baseRepository);
@@ -27,7 +28,7 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
 
     public Boolean isMutant(String[] dna) {
         int n = dna.length;
-        if(n== 0 ||dna[0].length()==0){
+        if(n== 0 || dna[0].isEmpty()){
             throw new IllegalArgumentException("La cadena es vacia. Ingrese una cadena con caracteres válidos");
         }
 
@@ -45,15 +46,13 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
             humanCounter = n - contadorSecuencias;
             mutantCounter = contadorSecuencias;
             boolean isMutant = contadorSecuencias > 1;
-            if(isMutant == true){
+            if(isMutant){
                 Mutant mutant = Mutant.builder().build();
                 mutant.setSequence(String.join(",", dna));
                 mutant.setEsMutante(isMutant);
                 mutantRepository.save(mutant);
-                MutantStats mutantStats = MutantStats.builder().build();
-                mutantStats.setMutantCounter(mutantCounter);
-                mutantStats.setHumanCounter(humanCounter);
-                mutantStatsRepository.save(mutantStats);
+                MutantStats mutantStats = new MutantStats(mutantCounter,humanCounter,(double) mutantCounter/humanCounter);
+                mutantStatsServiceImpl.save(mutantStats);
             }
         return isMutant;
     }

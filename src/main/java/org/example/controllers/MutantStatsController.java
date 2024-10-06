@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,11 +16,11 @@ public class MutantStatsController extends BaseControllerImpl<MutantStats, Mutan
 
     @Autowired
     private MutantStatsServiceImpl mutantStatsServiceImpl;
-    @PostMapping("/mutant-stats/save")
-    @Override
-    public ResponseEntity<?> save(MutantStats entity){
+
+    @GetMapping("/stats")
+    public ResponseEntity<?> getStats(){
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(service.save(entity));
+            return ResponseEntity.status(HttpStatus.OK).body(mutantStatsServiceImpl.getMutantStats());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, por favor intente más tarde\"}");
         }

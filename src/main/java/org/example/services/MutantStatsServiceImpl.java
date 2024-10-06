@@ -19,4 +19,13 @@ public class MutantStatsServiceImpl extends BaseServiceImpl<MutantStats,Long>{
         super(baserepository);
     }
 
+    public MutantStats getMutantStats(){
+        MutantStats mutantStats = new MutantStats();
+        List<MutantStats> mutantStatsList = mutantStatsRepository.findAll();
+        if(!mutantStatsList.isEmpty()){
+            mutantStats = mutantStatsList.get(0);
+        }
+        return mutantStats;
+    }
 }
+
