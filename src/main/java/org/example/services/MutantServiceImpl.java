@@ -48,7 +48,7 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
             contadorSecuencias += checkDiagonal(dna,n);
             humanCounter = n - contadorSecuencias;
             mutantCounter = contadorSecuencias;
-            boolean isMutant = contadorSecuencias > 1;
+            boolean isMutant = contadorSecuencias >= 1;
             if(isMutant){
                 Mutant mutant = Mutant.builder().build();
                 mutant.setSequence(String.join(",", dna));
