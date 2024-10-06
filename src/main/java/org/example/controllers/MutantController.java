@@ -19,22 +19,11 @@ public class MutantController  extends BaseControllerImpl<Mutant, MutantServiceI
      public ResponseEntity<?> checkMutant(@RequestBody String[] dna){
         boolean isMutant = mutantServiceImpl.isMutant(dna);
         if(isMutant){
-            return ResponseEntity.ok(dna.toString());
+            return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
-          // try{
-            // return ResponseEntity.status(HttpStatus.OK).body(service.isMutant(dna));
-        // } catch (Exception e) {
-          //      return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
-        //}
      }
-
-    // @GetMapping(path ="/stats")
-    //public ResponseEntity<?> getStatsMutant(){
-       // return
-    // }
-
     @PostMapping("/mutant/save")
     @Override
     public ResponseEntity<?> save(Mutant entity){
@@ -44,6 +33,4 @@ public class MutantController  extends BaseControllerImpl<Mutant, MutantServiceI
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, por favor intente más tarde\"}");
         }
     }
-
-
 }

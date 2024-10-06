@@ -16,17 +16,20 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
     private MutantRepository mutantRepository;
 
     @Autowired
-    private MutantStatsServiceImpl mutantStatsServiceImpl;
+    private MutantStatsRepository mutantStatsRepository;
 
     public MutantServiceImpl(BaseRepository<Mutant, Long> baseRepository) {
         super(baseRepository);
     }
 
-    private int mutantCounter = 0;
-    private int humanCounter = 0;
-    int contadorSecuencias=0;
-
+    private int contadorSecuencias;
+    private int mutantCounter;
+    private int humanCounter;
     public Boolean isMutant(String[] dna) {
+            contadorSecuencias=0;
+             mutantCounter = 0;
+             humanCounter = 0;
+
         int n = dna.length;
         if(n== 0 || dna[0].isEmpty()){
             throw new IllegalArgumentException("La cadena es vacia. Ingrese una cadena con caracteres válidos");
@@ -52,41 +55,43 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
                 mutant.setEsMutante(isMutant);
                 mutantRepository.save(mutant);
                 MutantStats mutantStats = new MutantStats(mutantCounter,humanCounter,(double) mutantCounter/humanCounter);
-                mutantStatsServiceImpl.save(mutantStats);
+                mutantStatsRepository.save(mutantStats);
             }
         return isMutant;
     }
 
     private int checkHorizontal(String[] dna, int n) {
-        contadorSecuencias=0;
+        int secuencias = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j <= n - 4; j++) {
                 if (dna[i].charAt(j) == dna[i].charAt(j + 1) &&
                         dna[i].charAt(j) == dna[i].charAt(j + 2) &&
                         dna[i].charAt(j) == dna[i].charAt(j + 3)) {
-                    contadorSecuencias++;
+                    secuencias++;
                 }
             }
         }
-        return contadorSecuencias;
+        contadorSecuencias += secuencias;
+        return secuencias;
     }
 
     private int checkVertical(String[] dna, int n) {
-        contadorSecuencias=0;
+        int secuencias = 0;
         for (int i = 0; i <= n - 4; i++) {
             for (int k = 0; k < n; k++) {
                 if (dna[i].charAt(k) == dna[i + 1].charAt(k) &&
                         dna[i].charAt(k) == dna[i + 2].charAt(k) &&
                         dna[i].charAt(k) == dna[i + 3].charAt(k)) {
-                    contadorSecuencias++;
+                    secuencias++;
                 }
             }
         }
-        return contadorSecuencias;
+        contadorSecuencias += secuencias;
+        return secuencias;
     }
 
     private int checkDiagonal(String[] dna, int n) {
-        contadorSecuencias=0;
+        int secuencias = 0;
         // Diagonal ascendente
         for (int i = 3; i < n; i++)
         {
@@ -96,7 +101,7 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
                         dna[i].charAt(t) == dna[i - 2].charAt(t + 2) &&
                         dna[i].charAt(t) == dna[i - 3].charAt(t + 3))
                 {
-                    contadorSecuencias++;
+                    secuencias++;
                 }
             }
         }
@@ -109,18 +114,12 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
                         dna[i].charAt(t) == dna[i + 2].charAt(t + 2) &&
                         dna[i].charAt(t) == dna[i + 3].charAt(t + 3))
                 {
-                    contadorSecuencias++;
+                    secuencias++;
                 }
             }
         }
-        return contadorSecuencias;
+        contadorSecuencias += secuencias;
+        return secuencias;
     }
 
-    public MutantStats getStats() {
-        double ratio = humanCounter == 0 ? 0 : (double) mutantCounter / humanCounter;
-        System.out.println("Contador humano: " + humanCounter);
-        System.out.println("Contador mutante: " + contadorSecuencias);
-        System.out.println("Ratio: " + ratio);
-        return new MutantStats(mutantCounter, humanCounter, ratio);
-    }
 }

@@ -1,5 +1,6 @@
 package org.example.controllers;
 
+import org.example.entities.Mutant;
 import org.example.entities.MutantStats;
 import org.example.services.MutantStatsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
