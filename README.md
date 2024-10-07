@@ -1,11 +1,6 @@
 __FUNCIONAMIENTO__
 
-https://mercadolexamen.onrender.com/
 
-Uso de la API en postman con el deploy en render 
-![img_3.png](img_3.png)
-
-Para la misma request vamos a hacer un GET 
 
 __Cadenas para probar el funcionamieanto__ 
 

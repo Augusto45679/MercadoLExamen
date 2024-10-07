@@ -19,7 +19,7 @@ public class MutantController  extends BaseControllerImpl<Mutant, MutantServiceI
      public ResponseEntity<?> checkMutant(@RequestBody String[] dna){
         boolean isMutant = mutantServiceImpl.isMutant(dna);
         if(isMutant){
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok().body("True");
         } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
