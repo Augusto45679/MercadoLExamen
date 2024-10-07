@@ -22,7 +22,7 @@ public class Main {
     @Transactional
     CommandLineRunner init(MutantRepository mutantRepository) {
         return args -> {
-            
+
         };
     }
 }

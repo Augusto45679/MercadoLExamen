@@ -1,12 +1,10 @@
-package services;
+package servicesTest;
 import org.example.Main;
-import org.example.services.*;
 
 import org.example.services.MutantServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -71,5 +69,9 @@ public class MutantServiceTest {
         String[] dna = {"ATGATG", "GTCTTA", "AATTGG", "ACTAGT", "GGATTC", "AGGCAA"};
         assertFalse(mutantServiceImpl.isMutant(dna));
     }
-
+    @Test
+    public void testMutant4(){
+        String[] dna = {"TTTTTTTTT","TTTTTTTTT", "TTTTTTTTT", "TTTTTTTTT", "CCGACCAGT","GGCACTCCA", "AGGACACTA", "CAAAGGCAT", "GCAGTCCCC"};
+        assertTrue(mutantServiceImpl.isMutant(dna));
+    }
 }
