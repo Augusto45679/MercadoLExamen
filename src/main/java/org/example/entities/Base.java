@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @MappedSuperclass
 @Setter
 @Getter
@@ -18,6 +17,6 @@ import lombok.Setter;
 public class Base implements java.io.Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 }
