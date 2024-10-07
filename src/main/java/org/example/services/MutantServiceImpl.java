@@ -18,6 +18,12 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
     @Autowired
     private MutantStatsRepository mutantStatsRepository;
 
+    @Autowired
+    public MutantServiceImpl(MutantRepository mutantRepository) {
+        super(mutantRepository);
+        this.mutantRepository = mutantRepository;
+    }
+
     public MutantServiceImpl(BaseRepository<Mutant, Long> baseRepository) {
         super(baseRepository);
     }

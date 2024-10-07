@@ -22,26 +22,7 @@ public class Main {
     @Transactional
     CommandLineRunner init(MutantRepository mutantRepository) {
         return args -> {
-
-            String[] notAnArray = {"ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"};
-            String[] notAnArray2 = {"ATGCGA","CAGTGC"};
-
-            Mutant mutant = Mutant.builder().build();
-            /*
-                CASOS MUTANTES
-
-                String[] dnaMutant1 = ["ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"]; // anduvo
-                String[] dnaMutant2 = ["ATGCGA", "CAGTGC", "TTAAGT", "AGATGG", "CTCCTA", "TCACTG"]; // no
-                String[] dnaMutant3 = ["AAAAAA", "CTGAGA", "TTATGT", "AGACGG", "GCGTCA", "TCACTG"]; // si
-                String[] dnaMutant4 = ["ATGCGA", "CAGTGC", "TTAAGT", "AGATGG", "CTGCTA", "TCACTG"]; // no
-                String[] dnaMutant5 = ["ATGCGA", "CTGTGC", "TTGTGT", "AGTGGG", "CTCTTA", "TCACTG"]; // si
-
-                CASOS NO MUTANTES
-                String[] dnaHuman1 = ["ATGCGA", "CAGTGC", "TTATTT", "AGACGG", "GCGTCA", "TCACTG"];
-                String[] dnaHuman2 = ["ATGCTA", "CAGTGC", "TTATTT", "AGACGG", "GCGTCA", "TCACTG"];
-                String[] dnaHuman3 = ["ATGCGA", "CATGGC", "TTATTT", "AGACGG", "CCGTCA", "TCACTG"];
-            */
-
+            
         };
     }
 }
