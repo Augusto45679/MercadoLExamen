@@ -27,9 +27,6 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
     public MutantServiceImpl(BaseRepository<Mutant, Long> baseRepository) {
         super(baseRepository);
     }
-    
-    private int mutantCounter;
-    private int humanCounter;
 
     public char[][] makeMatrix(String[] dna){
         int n = dna.length;
@@ -94,19 +91,10 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
         }
 
         if (isMutant) {
-            mutantCounter++;
             Mutant mutant = Mutant.builder().build();
             mutant.setSequence(String.join(",", dna));
             mutant.setEsMutante(true);
             mutantRepository.save(mutant);
-        } else {
-            humanCounter++;
-        }
-
-        // Actualiza estadísticas solo si se han realizado verificaciones previas
-        if (humanCounter > 0) {
-            MutantStats mutantStats = new MutantStats(mutantCounter, humanCounter, (double) mutantCounter / humanCounter);
-            mutantStatsRepository.save(mutantStats);
         }
 
         return isMutant;
