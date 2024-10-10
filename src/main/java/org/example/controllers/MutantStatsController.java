@@ -17,6 +17,7 @@ public class MutantStatsController{
     public MutantStatsController(MutantStatsServiceImpl mutantStatsService) {
         this.mutantStatsService = mutantStatsService;
     }
+
     @GetMapping("/stats")
     public MutantStats getStats(){
         return mutantStatsService.mutantStats();

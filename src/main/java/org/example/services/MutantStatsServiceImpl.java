@@ -15,9 +15,9 @@ import java.util.List;
 @Service
 public class MutantStatsServiceImpl{
 
+    @Autowired
     private MutantRepository mutantRepository;
 
-    @Autowired
     public MutantStatsServiceImpl(MutantRepository mutantRepository ) {
         this.mutantRepository = mutantRepository;
 
