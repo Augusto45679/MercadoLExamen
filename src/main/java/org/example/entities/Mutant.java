@@ -23,4 +23,10 @@ public class Mutant extends Base{
 
     @Column(nullable = false)
     private boolean esMutante;
+
+    private boolean isMutant;
+
+    public boolean isMutant() {
+        return isMutant;
+    }
 }

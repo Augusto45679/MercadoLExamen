@@ -1,14 +1,20 @@
 package org.example.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor
 @Setter
+@Getter
 public class MutantResponse {
-    private boolean isMutant;
 
-    public boolean isMutant() {
-        return isMutant;
-    }
+    @JsonProperty("mutantCounter")
+    private long mutantCounter;
+
+    @JsonProperty("humanCounter")
+    private long humanCounter;
+
+    private int ratio;
 }
