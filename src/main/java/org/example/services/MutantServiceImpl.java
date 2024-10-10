@@ -92,8 +92,8 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
 
         if (isMutant) {
             Mutant mutant = Mutant.builder().build();
-            mutant.setSequence(String.join(",", dna));
-            mutant.setEsMutante(true);
+            mutant.setDna(String.join(",", dna));
+            mutant.isMutant(true);
             mutantRepository.save(mutant);
         }
 

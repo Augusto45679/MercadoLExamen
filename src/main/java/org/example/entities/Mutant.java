@@ -18,15 +18,13 @@ import org.hibernate.envers.Audited;
 @Audited
 public class Mutant extends Base{
 
-    @Column(name = "sequence", unique = true,length = 1000)
-    private String sequence;
+    @Column(name = "dna_sequence", unique = true,length = 1000)
+    private String dna;
 
     @Column(nullable = false)
-    private boolean esMutante;
-
     private boolean isMutant;
 
-    public boolean isMutant() {
+    public boolean isMutant(boolean isMutant) {
         return isMutant;
     }
 }
