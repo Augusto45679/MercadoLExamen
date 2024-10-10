@@ -31,10 +31,33 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
     private int contadorSecuencias;
     private int mutantCounter;
     private int humanCounter;
+
+    public char[][] makeMatrix(String[] dna){
+        int n = dna.length;
+        char[][] matrix = new char[n][n];
+        // convertirString a Matriz
+        for(int i = 0; i < n; i++){
+            matrix[i] = dna[i].toCharArray();
+        }
+        return matrix;
+    }
+
+    public boolean searchMutantSequence(char[][] matrix,int x,int y,int dx,int dy){
+        int n = matrix.length;
+        char letra = matrix[x][y];
+        for (int i = 1; i < 4; i++) {
+            // Calcular nuevas coordenadas circulares
+            x = (x + dx + n) % n;
+            y = (y + dy + n) % n;
+
+            if (matrix[x][y] != letra) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public Boolean isMutant(String[] dna) {
-            contadorSecuencias=0;
-             mutantCounter = 0;
-             humanCounter = 0;
 
         int n = dna.length;
         if(n== 0 || dna[0].isEmpty()){
@@ -49,78 +72,45 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
             }
         }
 
-            contadorSecuencias += checkHorizontal(dna,n);
-            contadorSecuencias += checkVertical(dna,n);
-            contadorSecuencias += checkDiagonal(dna,n);
-            humanCounter = n - contadorSecuencias;
-            mutantCounter = contadorSecuencias;
-            boolean isMutant = contadorSecuencias >= 1;
-            if(isMutant){
-                Mutant mutant = Mutant.builder().build();
-                mutant.setSequence(String.join(",", dna));
-                mutant.setEsMutante(isMutant);
-                mutantRepository.save(mutant);
-                MutantStats mutantStats = new MutantStats(mutantCounter,humanCounter,(double) mutantCounter/humanCounter);
-                mutantStatsRepository.save(mutantStats);
-            }
-        return isMutant;
-    }
+        char[][] matrix = makeMatrix(dna);
 
-    private int checkHorizontal(String[] dna, int n) {
-        int secuencias = 0;
+        int[][] direcciones = {{0, 1}, {1, 0}, {1, 1}, {1, -1}};
+
+        boolean isMutant = false;
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j <= n - 4; j++) {
-                if (dna[i].charAt(j) == dna[i].charAt(j + 1) &&
-                        dna[i].charAt(j) == dna[i].charAt(j + 2) &&
-                        dna[i].charAt(j) == dna[i].charAt(j + 3)) {
-                    secuencias++;
+            for (int j = 0; j < n; j++) {
+                for (int[] dir : direcciones) {
+                    if (searchMutantSequence(matrix, i, j, dir[0], dir[1])) {
+                        isMutant = true;
+                        break;
+                    }
+                }
+                if (isMutant) {
+                    break;
                 }
             }
+            if (isMutant) {
+                break;
+            }
         }
-        contadorSecuencias += secuencias;
-        return secuencias;
-    }
 
-    private int checkVertical(String[] dna, int n) {
-        int secuencias = 0;
-        for (int i = 0; i <= n - 4; i++) {
-            for (int k = 0; k < n; k++) {
-                if (dna[i].charAt(k) == dna[i + 1].charAt(k) &&
-                        dna[i].charAt(k) == dna[i + 2].charAt(k) &&
-                        dna[i].charAt(k) == dna[i + 3].charAt(k)) {
-                    secuencias++;
-                }
-            }
+        if (isMutant) {
+            mutantCounter++;
+            Mutant mutant = Mutant.builder().build();
+            mutant.setSequence(String.join(",", dna));
+            mutant.setEsMutante(true);
+            mutantRepository.save(mutant);
+        } else {
+            humanCounter++;
         }
-        contadorSecuencias += secuencias;
-        return secuencias;
-    }
 
-    private int checkDiagonal(String[] dna, int n) {
-        int secuencias = 0;
-        // Diagonal ascendente (izquierda a derecha, abajo a arriba)
-        for (int i = 0; i <= n - 4; i++) {
-            for (int t = 0; t <= n - 4; t++) {
-                if (dna[i].charAt(t) == dna[i + 1].charAt(t + 1) &&
-                        dna[i].charAt(t) == dna[i + 2].charAt(t + 2) &&
-                        dna[i].charAt(t) == dna[i + 3].charAt(t + 3)) {
-                    secuencias++;
-                }
-            }
+        // Actualiza estadísticas solo si se han realizado verificaciones previas
+        if (humanCounter > 0) {
+            MutantStats mutantStats = new MutantStats(mutantCounter, humanCounter, (double) mutantCounter / humanCounter);
+            mutantStatsRepository.save(mutantStats);
         }
-        // Diagonal descendente (izquierda a derecha, arriba a abajo)
-        for (int i = 3; i < n; i++) {
-            for (int t = 0; t <= n - 4; t++) {
-                if (dna[i].charAt(t) == dna[i - 1].charAt(t + 1) &&
-                        dna[i].charAt(t) == dna[i - 2].charAt(t + 2) &&
-                        dna[i].charAt(t) == dna[i - 3].charAt(t + 3)) {
-                    secuencias++;
-                }
-            }
-        }
-        // Contabilizar las secuencias diagonales encontradas
-        contadorSecuencias += secuencias;
-        return secuencias;
+
+        return isMutant;
     }
 
 }
