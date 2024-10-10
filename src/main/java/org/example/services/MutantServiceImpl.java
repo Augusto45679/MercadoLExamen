@@ -27,8 +27,7 @@ public class MutantServiceImpl extends BaseServiceImpl<Mutant,Long> {
     public MutantServiceImpl(BaseRepository<Mutant, Long> baseRepository) {
         super(baseRepository);
     }
-
-    private int contadorSecuencias;
+    
     private int mutantCounter;
     private int humanCounter;
 

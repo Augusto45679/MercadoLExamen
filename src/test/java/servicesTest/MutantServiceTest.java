@@ -20,7 +20,7 @@ public class MutantServiceTest {
     @Test
     public void testRows(){
         String[] dna = {"AAAATG","TGCAGT","GCTTCC","CCCCTG","GTAGTC","AGTCAC"};
-        assertFalse(mutantServiceImpl.isMutant(dna));
+        assertTrue(mutantServiceImpl.isMutant(dna));
     }
 
     @Test
